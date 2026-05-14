@@ -1,0 +1,61 @@
+{
+  "name": "@welsonviana/n8n-nodes-generic-rest-chat-model-AI",
+  "version": "0.1.0",
+  "description": "Generic REST Chat Model sub-node for n8n AI Agent. Supports IBM watsonx Orchestrator and any OpenAI-compatible REST LLM.",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "ai",
+    "llm",
+    "watsonx",
+    "ibm",
+    "rest",
+    "chat-model"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "welsonvv"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/welsonvv/n8n-nodes-generic-rest-chat-model-AI.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && cp nodes/GenericRestChatModel/restChatModelAi.svg dist/nodes/GenericRestChatModel/",
+    "dev": "tsc --watch",
+    "lint": "eslint nodes credentials --ext .ts",
+    "lintfix": "eslint nodes credentials --ext .ts --fix",
+    "deploy": "bash deploy.sh",
+    "deploy:no-restart": "bash deploy.sh --no-restart",
+    "prepublishOnly": "npm run build && npm run lint"
+  },
+  "files": [
+    "dist",
+    "index.js",
+    "index.d.ts"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/GenericRestChatModelApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/GenericRestChatModel/GenericRestChatModel.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@langchain/core": "^0.3.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "n8n-workflow": "^1.0.0",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "@langchain/core": "*",
+    "n8n-workflow": "*"
+  }
+}

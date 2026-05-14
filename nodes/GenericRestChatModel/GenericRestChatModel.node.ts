@@ -3,6 +3,7 @@ import {
 	INodeTypeDescription,
 	ISupplyDataFunctions,
 	NodeConnectionTypes,
+	NodeOperationError,
 	SupplyData,
 } from 'n8n-workflow';
 import { getIbmIamToken, RestChatModel, RestChatModelConfig } from './RestChatModel';
@@ -37,7 +38,9 @@ export class GenericRestChatModel implements INodeType {
 			},
 			resources: {},
 		},
+		// eslint-disable-next-line n8n-nodes-base/node-class-description-inputs-wrong-regular-node
 		inputs: [],
+		// eslint-disable-next-line n8n-nodes-base/node-class-description-outputs-wrong
 		outputs: [NodeConnectionTypes.AiLanguageModel],
 		outputNames: ['Model'],
 		credentials: [
@@ -53,7 +56,7 @@ export class GenericRestChatModel implements INodeType {
 				type: 'string',
 				default: '',
 				placeholder:
-					'https://api.br-sao.watson-orchestrate.cloud.ibm.com/instances/{id}/v1/orchestrate/{agent_id}/chat/completions',
+					'https://api.br-sao.watson-orchestrate.cloud.ibm.com/instances/{instanceID}/v1/orchestrate/{agentID}/chat/completions',
 				required: true,
 				description: 'Full POST URL of the LLM REST endpoint',
 			},
@@ -82,7 +85,7 @@ export class GenericRestChatModel implements INodeType {
 					show: { stateful: [true] },
 				},
 				description:
-					'Session or thread ID injected as <code>{{sessionId}}</code> in the body template.',
+					'Session or thread ID injected as <code>{{sessionId}}</code> in the body template',
 			},
 			{
 				displayName: 'Inject History Into Message',
@@ -159,7 +162,7 @@ export class GenericRestChatModel implements INodeType {
 			const raw = typeof bodyTemplateRaw === 'string' ? bodyTemplateRaw : JSON.stringify(bodyTemplateRaw);
 			bodyTemplate = JSON.parse(raw);
 		} catch (e) {
-			throw new Error(`Invalid JSON in "Request Body Template": ${(e as Error).message}`);
+			throw new NodeOperationError(this.getNode(), `Invalid JSON in "Request Body Template": ${(e as Error).message}`);
 		}
 
 		// Parse additional headers

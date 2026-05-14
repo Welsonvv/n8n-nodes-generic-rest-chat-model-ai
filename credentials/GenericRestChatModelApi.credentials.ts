@@ -11,7 +11,7 @@ export class GenericRestChatModelApi implements ICredentialType {
 			type: 'options',
 			options: [
 				{
-					name: 'IBM IAM (watsonx Orchestrator)',
+					name: 'IBM IAM (Watsonx Orchestrator)',
 					value: 'ibmIam',
 					description: 'Exchanges IBM API Key for a Bearer token via IAM automatically',
 				},

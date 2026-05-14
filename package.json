@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/welsonvv/n8n-nodes-generic-rest-chat-model-ai.git"
+    "url": "git+https://github.com/Welsonvv/n8n-nodes-generic-rest-chat-model-AI.git"
   },
   "main": "index.js",
   "scripts": {
